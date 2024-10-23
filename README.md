@@ -33,6 +33,9 @@ PLEX_BASE_URL="http://[plexserver_ip_address]:32400"
 ```
 
 * How to run it?
+  Note that I've used this font for clock display code: https://www.1001fonts.com/advanced-led-board-7-font.html
+  For Plexamp Album Display, Iǘe used font family "San Fransico", please install them for good results.
+  
   As Raspberry Pi OS comes with Python3, it is as simple as creating a systemctl service to run on the startup.
 
 ```
@@ -74,6 +77,7 @@ sudo systemctl start dap.service
 
 sudo systemctl status dap.service
 ```
+Restart your pi.
 
 Any thing else recommended?
 I recommend running this in a Python virtual environment. Please check main.py, I've used .venv as virtual environment, atleast for running nfc script. Make sure you have all packages installed.
