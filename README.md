@@ -40,7 +40,7 @@ PLEX_BASE_URL="http://[plexserver_ip_address]:32400"
 
 ```
   sudo nano /etc/systemd/system/dap.service 
-  ```
+```
   Paste this in the service file
 
 
@@ -77,6 +77,56 @@ sudo systemctl start dap.service
 
 sudo systemctl status dap.service
 ```
+
+Create a webhook listener service also.
+
+Setup webhook in your Plex Server Settings first.
+
+* Plex >>>> Settings >>>> Your Plex Server name >>> Webhooks.
+Add http://pi.local:33500/webhook
+Remember to change pi.local with your Raspberry Pi hostname or ip address for it to work correctly.
+
+```
+  sudo nano /etc/systemd/system/webhook.service 
+```
+  Paste this in the service file
+
+
+```
+  
+[Unit]
+Description=Webhook
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStartPre=/bin/sleep 10
+ExecStart=/usr/bin/python3 /home/pi/plexdap/webhooklistener.py
+Restart=on-failure
+User=jay
+WorkingDirectory=/home/pi/plexdap
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+```
+  Give permissions to main.py, and run the service.
+
+```
+chmod +x /home/pi/plexdap/webhooklistener.py
+
+sudo systemctl enable webhook.service
+
+sudo systemctl start webhook.service
+
+sudo systemctl status webhook.service
+```
+
+
 Restart your pi.
 
 Any thing else recommended?
