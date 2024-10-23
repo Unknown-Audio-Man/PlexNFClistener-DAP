@@ -24,7 +24,7 @@ load_dotenv()
 # Constants
 API_KEY = os.getenv("OPENWEATHER_API_KEY")
 FRAMEBUFFER = "/dev/fb0"
-FONT_PATH = "/home/jay/led.ttf" #"/usr/share/fonts/truetype/sf-pro/SF-Pro-Display-Regular.otf" 
+FONT_PATH = "/home/pi/plexdap/led.ttf" #"/usr/share/fonts/truetype/sf-pro/SF-Pro-Display-Regular.otf" 
 CACHE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cache')
 os.makedirs(CACHE_DIR, exist_ok=True)
 
