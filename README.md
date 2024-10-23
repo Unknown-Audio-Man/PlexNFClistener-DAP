@@ -11,25 +11,43 @@ This project is a simple Digital Audio Player that gives us a similar feel of a 
 * How to run it?
   As Raspberry Pi OS comes with Python3, it is as simple as creating a systemctl service to run on the startup.
 
-              sudo nano /etc/systemd/system/my_python_program.service
+              sudo nano /etc/systemd/system/dap.service 
+  
   Paste this in the service file
+
+
+```
   
 [Unit]
-Description=My Python Program
-After=network.target
+Description=Master Code for NFC and Plexamp Art Display
+After=network-online.target
+Wants=network-online.target
 
 [Service]
-ExecStart=/usr/bin/python3 /path/to/your/main.py
-WorkingDirectory=/path/to/your/script/
-User=pi
-Restart=always
-Environment="PYTHONUNBUFFERED=1"
-StandardOutput=inherit
-StandardError=inherit
-RestartSec=5
+Type=simple
+ExecStartPre=/bin/sleep 10
+ExecStart=/usr/bin/python3 /home/pi/plexdap/main.py
+Restart=on-failure
+User=jay
+WorkingDirectory=/home/pi/plexdap
+Environment=PYTHONUNBUFFERED=1
 
 [Install]
 WantedBy=multi-user.target
+
+
+
+```
+Give permissions to main.py, and run the service.
+```
+chmod +x /path/to/your/main.py
+
+sudo systemctl enable dap.service
+
+sudo systemctl start dap.service
+
+sudo systemctl status dap.service
+```
 
 
 
