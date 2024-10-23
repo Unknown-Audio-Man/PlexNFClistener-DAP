@@ -148,6 +148,12 @@ sudo systemctl start webhook.service
 sudo systemctl status webhook.service
 ```
 
+change this line in webhooklistener.py with your player name.
+
+```
+TARGET_PLAYER = "Your_Headless_plexamp_player_name"
+```
+
 
 Restart your pi.
 
